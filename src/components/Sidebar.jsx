@@ -1,12 +1,14 @@
+import { NavLink } from "react-router-dom";
+
 function Sidebar() {
   return (
     <div class="sidebar">
       <ul>
         <li>
-          <a href="">Home</a>
+        <button><NavLink to="/">Home</NavLink></button>
         </li>
         <li>
-          <a href="">About</a>
+          <button><a href=""><NavLink to="/About">About</NavLink></a></button>
         </li>
       </ul>
     </div>

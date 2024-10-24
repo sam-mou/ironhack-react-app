@@ -19,17 +19,15 @@ h1 {
 p {
   font-size: 12px;
   font-family: 'Times New Roman', Times, serif;
-  color: aqua;
+  color: black;
 }
 
 .navbar{
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  position: absolute;
   padding: 10px;
   margin-left: 10vw;
-  background-color: white;
 }
 
 .logo {
@@ -41,7 +39,6 @@ p {
 .footer {
   padding: 1px;
   text-align: center;
-  position: fixed;
   bottom: 0;
   width: 100%;
 }
@@ -87,6 +84,7 @@ img {
   padding: 15px;
   border: 2px solid #ccc;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .recipe-text {
