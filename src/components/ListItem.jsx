@@ -14,6 +14,7 @@ const ListItem = ({ item, onDelete }) => {
           <Link to={`/List/${item.id}`}>{item.name}</Link>
         </h3>
         <p>Calories: {item.calories}</p>
+        <p>Servings: {item.servings}</p>
         <p>Status: {allValuesTruthy ? "✅" : "❌"}</p>
         <button onClick={() => onDelete(item.id)} className="recipe-button">
           Delete Recipe

@@ -1,25 +1,15 @@
-import React, { useState } from "react";
-import recipes from "../data/recipes.json";
+import React from "react";
 import ListItem from "./ListItem";
-import { useParams } from "react-router-dom";
 
-function List() {
-  const [recipesToDisplay, setRecipesToDisplay] = useState(recipes);
-
-  const deleteRecipe = (recipeId) => {
-    const newRecipes = recipesToDisplay.filter((recipeObj) => recipeObj.id !== recipeId);
-    setRecipesToDisplay(newRecipes);
-  };
-
+function List({ recipes, onDelete }) {
   return (
     <div>
       <ul className="recipes">
-        {recipesToDisplay.map((recipeObj) => (
+        {recipes.map((recipeObj) => (
           <ListItem
             key={recipeObj.id}
             item={recipeObj}
-            onDelete={deleteRecipe}
-          />
+            onDelete={() => onDelete(recipeObj.id)}/>
         ))}
       </ul>
     </div>

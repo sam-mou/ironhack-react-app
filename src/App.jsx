@@ -1,29 +1,52 @@
 import "./App.css";
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+
+import recipes from "./data/recipes.json";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
 import List from "./components/List";
-import ListItem from "./components/ListItem";
-import { Routes, Route, NavLink } from "react-router-dom";
-import About from "./components/About";
-import ItemDetails from "./components/ItemDetails";
+import CreateItem from "./components/CreateItem";
 
 function App() {
+  const [recipesToDisplay, setRecipesToDisplay] = useState(recipes);
+
+  const deleteRecipe = (recipeId) => {
+    const newRecipes = recipesToDisplay.filter((recipeObj) => {
+      return recipeObj.id !== recipeId;
+    });
+    setRecipesToDisplay(newRecipes);
+  };
+
+  const createRecipe = (itemDetails) => {
+    const recipeIds = recipesToDisplay.map((recipeObj) => recipeObj.id);
+    const maxId = recipeIds.length > 0 ? Math.max(...recipeIds) : 0;
+    const nextId = maxId + 1;
+
+    const newRecipe = {
+      ...itemDetails,
+      id: nextId,
+    };
+
+    const newArray = [newRecipe, ...recipesToDisplay];
+    setRecipesToDisplay(newArray);
+  };
+
   return (
     <div className="App">
       <Navbar />
-      <div>
-        <Routes>
-          <Route path="/" element={<List />} />
-          <Route path="/ListItem" element={<ListItem />} />
-          <Route path="/About" element={<About />} />
-          <Route path="/List/:recipeId" element={<ItemDetails />} />
-          <Route path="*" element={<h1>Page not found</h1>} />
-        </Routes>
-      </div>
+      <CreateItem callBackToCreate={createRecipe} />
+      <Routes>
+        <Route
+          path="/"
+          element={<List recipes={recipesToDisplay} onDelete={deleteRecipe} />}
+        />
+      </Routes>
       <Sidebar />
       <Footer />
     </div>
   );
 }
+
 export default App;
